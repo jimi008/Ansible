@@ -1,0 +1,9 @@
+# To ignore the failed commands, you can use ignore_errors
+- name: "strategy demo"
+  hosts: webserver1,sqlserver1
+  tasks:
+    - name: "first task"
+      command: touch /tmp/task/task1.txt
+      ignore_errors: True
+    - name: "second task"
+      command: touch /tmp/task2.txt

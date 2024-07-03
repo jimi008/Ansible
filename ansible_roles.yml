@@ -1,0 +1,38 @@
+# ansible-galaxy init dummy
+# Above command will generate a directory structure
+
+# Consider below playbook
+- name: this is our 1st play.
+  hosts: webserver1
+  tasks:
+    - name: "task 1"
+      command: touch /tmp/php_play_1_task_1.txt
+    - name: "task 2"
+      command: touch /tmp/php_play_1_task_2.txt
+- name: this is our 2nd play.
+  hosts: webserver1
+  tasks:
+    - name: "task 1"
+      command: touch /tmp/web_play_2_task_1.txt
+    - name: "task 2"
+      command: touch /tmp/web_play_2_task_2.txt
+- name: this is our 3rd play.
+  hosts: sqlserver1
+  tasks:
+    - name: "task 1"
+      command: touch /tmp/sql_play_3_task_1.txt
+    - name: "task 2"
+      command: touch /tmp/sql_play_3_task_2.txt
+
+# We have created 3 roles as php, webserver, sqlserver
+# lets create a playbook which will use above roles and execute all task in them 
+- name: this is our 1st play.
+  hosts: webserver1
+  roles:
+    - php
+    - webserver
+
+- name: this is our 1st play.
+  hosts: sqlserver1
+  roles:
+    - sqlserver

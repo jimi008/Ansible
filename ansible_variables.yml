@@ -1,0 +1,20 @@
+# Start the apache2 service on webserver1
+- name: usign variable in playbook
+hosts: webserver1
+vars:
+  servicename: apache2
+tasks:
+  - name: 'creating file using variable'
+    service: name={{ servicename }} state=started
+
+# Stop the service "vsftpd"
+- name: usign variable in playbook
+  hosts: webserver1
+  vars:
+    servicename: vsftpd
+  tasks:
+    - name: "creating file using variable"
+      service: name={{ servicename }} state=stopped
+
+# run the playbook 
+# $ansible-playbook ansible_variables.yml.yml

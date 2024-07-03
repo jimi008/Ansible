@@ -1,0 +1,54 @@
+#Copy module
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: "create a dummy file on websever1"
+      copy: src=test.yml dest=/tmp/ owner=jamil group=jamil mode=0644
+
+#Lineinfile module
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: "create a dummy file on websever1"
+      lineinfile: path=/tmp/test.txt line="jamil"
+      
+#Command Module 
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: Run the command if the specified file does not exist.
+      command: touch /tmp/test.txt
+
+#Script module
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: "create a dummy file on websever1"
+      script: testScript.sh Jamil
+
+Service module
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: "create a dummy file on websever1"
+      service:
+        name: apache2
+        state: started #stopped
+
+#Package management module
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: install the latest version of Apache and MariaDB
+      dnf:
+        name:
+          - httpd
+          - mariadb-server
+      state: latest
+
+#User module
+- name: this is our first play.
+  hosts: webserver1
+  tasks:
+    - name: "create a dummy file on websever1"
+      user: name="mytestUser" state=present password="$6$A0JtS1g5vFZ$O/WkOD/ZyHTLm5Yn5HT213gLSwTzxLTT/V4D2ly0JYcdRvhDQV.HAMsiVHkYj5WhHdaaU/WwMDxgTW0pHQzrF0"

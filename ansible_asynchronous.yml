@@ -1,0 +1,31 @@
+# Synchronous playbook tasks
+- name: this is our 1st play.
+  hosts: webserver1
+  tasks:
+    - name: "sleep for 120 sec"
+      command: sleep 120
+    - name: "second task"
+      command: touch /tmp/second_task.txt
+
+# Asynchronous playbook tasks
+- name: this is our 1st play.
+  hosts: webserver1
+  tasks:
+    - name: "sleep for 60 sec"
+      command: sleep 60
+      async: 70
+      poll: 35
+    - name: "second task"
+      command: touch /tmp/second_task.txt
+
+
+# Setting poll equal to 0 (FIRE-AND-FORGET)
+- name: this is our 1st play.
+  hosts: webserver1
+  tasks:
+    - name: "sleep for 120 sec"
+      command: sleep 120
+      async: 60
+      poll: 0
+    - name: "second task"
+      command: touch /tmp/second_task.txt

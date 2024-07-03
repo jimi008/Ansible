@@ -1,0 +1,31 @@
+ # LINEAR Strategy
+- name: "strategy demo"
+  hosts: webserver1,sqlserver1
+  strategy: linear
+  tasks:
+    - name: "first task"
+      apt: name='apache2' state='present'
+    - name: "second task"
+      command: touch /tmp/strategy_task2.txt
+
+# FREE Strategy
+- name: "strategy demo"
+  hosts: webserver1,sqlserver1
+  strategy: free
+  tasks:
+    - name: "first task"
+      apt: name='apache2' state='present'
+    - name: "second task"
+      command: touch /tmp/strategy_task2.txt
+
+# Fork/Serial default: 5 hosts, can be modified in playbook 
+- name: "strategy demo"
+  hosts: webserver1,sqlserver1
+  serial: 1
+  tasks:
+    - name: "first task"
+      apt: name='apache2' state='present'
+    - name: "second task"
+      command: touch /tmp/strategy_task2.txt
+    - name: "3rd task"
+      command: sleep 30

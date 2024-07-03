@@ -1,0 +1,29 @@
+# Run Ansible Tasks as Sudo
+- name: this is our first play.
+  hosts: webserver
+  sudo: yes
+  tasks:
+    - name: "create a dummy file on websever1"
+      lineinfile: dest=/etc/resolv.conf line="nameserver 8.8.8.8"
+
+# Running this playbook, we need to provide the password 
+# $ ansible-playbook lineInFile1.yml --ask-become-pass
+
+# The above task can be achieved as the root user, you can implement the become directive and set the value to 'true' as shown below
+- name: this is our first play.
+  hosts: webserver
+  become: true
+  become_user: root
+  tasks:
+    - name: "create a dummy file on websever1"
+      lineinfile: dest=/etc/resolv.conf line="nameserver 8.8.8.8"
+
+# Run Ansible Tasks as a user other than root
+- name: this is our first play.
+  hosts: webserver
+  become: yes
+  become_user: jamil
+  become_method: su
+  tasks:
+    - name: "login username"
+      command: touch /tmp/become_jamil.txt

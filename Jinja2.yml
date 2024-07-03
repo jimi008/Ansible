@@ -1,0 +1,48 @@
+# Ansible uses Jinja2 templating to enable dynamic expressions, dynamic file generation based on its parameter, and access to variables.
+- hosts: webserver
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Checking the employee name
+      debug:
+        msg: "Employee name {{ name }}"
+
+# Example 2
+- name: this is our first play.
+  hosts: webserver1
+  vars:
+    your_name: Gaurav
+    dummy_list:
+      - 1
+      - 10
+      - 20
+      - 30
+      - 10
+    dummy_list2:
+      - 30
+      - 40
+      - 10
+      - 50
+  tasks:
+    - debug:
+        msg: "Hello {{ your_name  }}"
+    - debug:
+        msg: "Hello {{ your_name | upper  }}"
+    - debug:
+        msg: "Hello {{ your_name | lower  }}"
+    - debug:
+        msg: "Hello {{ your_name | replace('Gaurav','Saurav') }}"
+    - debug:
+        msg: "{{ dummy_list | min }}"
+    - debug:
+        msg: "{{ dummy_list | max }}"
+    - debug:
+        msg: "{{ dummy_list | unique }}"
+    - debug:
+        msg: "{{ dummy_list | union(dummy_list2) }}"
+    - debug:
+        msg: "{{ dummy_list | intersect(dummy_list2) }}"
+    - debug:
+        msg: "{{ 100 | random }}"
+    - debug:
+        msg: "{{ '/etc/ansible/ansible.cfg' | basename }}"
